@@ -1,0 +1,28 @@
+/* Styl podstawowy dla przycisku */
+.delete-btn {
+  background-color: #ff4d4f; /* Czerwony */
+  color: white;            /* Biały tekst */
+  border: none;            /* Bez obramowania */
+  border-radius: 4px;      /* Zaokrąglone rogi */
+  padding: 5px 10px;       /* Wewnętrzne odstępy */
+  cursor: pointer;         /* Wskaźnik zmienia się na rękę */
+  font-size: 14px;         /* Wielkość tekstu */
+  transition: background-color 0.3s ease; /* Animacja przejścia koloru */
+}
+
+/* Efekt najechania kursorem */
+.delete-btn:hover {
+  background-color: #ff7875; /* Jaśniejszy czerwony */
+}
+
+/* Efekt aktywacji (po kliknięciu) */
+.delete-btn:active {
+  background-color: #d9363e; /* Ciemniejszy czerwony */
+}
+
+.button{
+  height: auto;
+  padding: 0.6em;
+  border: #888 solid 1px;
+  border-radius: 2px;
+}

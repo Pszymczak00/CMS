@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  background-color: #27272f;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+p{
+  color: white;
+  font-size: 2em;
+  font-weight: 700;
+  margin: 0;
+  padding: 0.5em;
+}
+
+div p{
+  border: 3px solid white;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+div{
+  display: flex;
+  justify-content: center
+}
+
+@media (max-width: 450px){
+  p{
+    font-size: 1rem;
+  }
+  div p{
+    font-size: 1rem;    
+  }
+}

@@ -1,0 +1,19 @@
+<main class="main">
+  <app-header></app-header>
+  <div class="content">
+    @if(mainSiteVisible) {
+      <app-item-carousel></app-item-carousel>
+      <app-client-opinions></app-client-opinions> 
+    }
+    @else if(cateringName){
+      <app-place-order [cateringName]="cateringName"></app-place-order>
+    }
+    @else if(cateringDetails){
+      <app-details [name]="cateringDetails"></app-details>
+    }
+    @else {
+      <app-site [name]="siteName"></app-site>
+    }
+  </div>
+  <app-footer></app-footer>
+</main>

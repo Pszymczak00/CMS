@@ -1,0 +1,16 @@
+<div>
+  <p class="name" (click)="OnClick()">{{businessName}}</p>
+  <ul class="contacts">
+    <li class="phoneNumber">Tel: {{numer}}</li>
+    <li class="email">Email: {{email}}</li>
+  </ul>
+</div>
+<nav>
+  <ul>
+    @for (item of navBar; track $index) {
+      <li>
+        <button (click)="OnNavClick(item.name)">{{item.name}}</button>   
+      </li>
+    }
+  </ul>
+</nav>

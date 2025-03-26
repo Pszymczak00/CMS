@@ -1,0 +1,58 @@
+<div class="navigation">
+  <h1>
+    Dashboard
+  </h1>
+  <nav>
+    <ul>
+    @if(isAuthorised){
+      @for (item of navBar; track $index) {
+        <li>
+          <button (click)="OnNavClick(item)">{{item}}</button>   
+        </li>
+      }
+      <li>
+        <button (click)="Logout()">Wyloguj</button>   
+      </li>
+      <li>
+        <button (click)="ChangePassword()">Zmień hasło</button>   
+      </li>
+    }
+    </ul>
+  </nav>
+</div>
+<div class="data">
+  @if(!isAuthorised){
+    <app-login></app-login>
+  }
+  @else if (site === "Podstawowe dane") {
+    <h2>Podstawowe dane</h2>
+    <app-basic-business-data-grid></app-basic-business-data-grid>
+  }
+  @else if (site === "Opinie klientów") {
+    <h2>Opinie klientów</h2>
+    <app-client-opinions-grid></app-client-opinions-grid>
+  }
+  @else if (site === "Podstrony") {
+    <h2>Podstrony</h2>
+    <app-sites-grid></app-sites-grid>
+  }
+  @else if (site === "Dostępne diety") {
+    <h2>Dostępne diety</h2>
+    <catering-types-grid></catering-types-grid>
+  }
+  @else if (site === "Zamówienia") {
+    <h2>Zamówienia</h2>
+    <app-orders-grid></app-orders-grid>
+  }
+  @else if (site === "Photo-uploader") {
+    <h2>Wybierz zdjęcie</h2>
+    <app-photo-uploader [id]="number"></app-photo-uploader>
+  }
+  @else if (site === "Catering-prices") {
+    <h2>Ceny diety</h2>
+    <app-catering-prices-grid [id]="number"></app-catering-prices-grid>
+  }
+  @else if (site === "change-password") {
+    <app-change-password></app-change-password>
+  }
+</div>

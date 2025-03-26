@@ -1,0 +1,15 @@
+<h2>Wybierz swoją dietę</h2>
+<div class="carousel">
+  <button (click)="previous()" class="arrow-left">←</button>
+  <div class="items">
+    @for (item of currentItems; track $index) {
+      <div class="cateringTypes">
+        <img [src]="item.url" alt="">
+        <p>Dieta {{item.name}}</p>
+        <button (click)="onDetailsClick(item.name)">Szczegóły</button>
+        <button (click)="onClick(item.name)">Zamów</button>
+      </div>
+    }
+  </div>
+  <button (click)="next()" class="arrow-right">→</button>
+</div>

@@ -1,0 +1,9 @@
+:host{
+  margin-left: 5%;
+  margin-right: 5%;
+  display: block;
+}
+
+p{
+  white-space: pre-wrap;
+}

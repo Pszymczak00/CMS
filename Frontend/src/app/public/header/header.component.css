@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  background-color: #f8f8ff;
+  text-align: center;
+  padding: 0.5rem 0 0 0;
+  color: #222;
+  font-weight: 700;
+}
+
+div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 5%;
+}
+
+ul{
+  list-style: none;
+  text-align: end;
+}
+
+ul li{
+  display: inline;
+}
+
+nav ul{
+  display: block;
+  text-align: start;
+  border-top: #888 solid 2px;
+  border-bottom: #888 solid 2px;
+  padding: 0.5rem 0 0.5rem 5%;
+}
+
+p{
+  font-size: 2rem;
+}
+
+.phoneNumber{
+  padding-right: 1rem;
+}
+
+.email{
+  padding-right: 1rem;
+}
+
+nav ul li{
+  padding-right: 2rem;
+}
+
+.name{
+  cursor: pointer;
+}
+
+ul li button{
+  display: inline;
+  border: none;
+  background-color: #f8f8ff;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+button:hover {
+  cursor: pointer; 
+}
+
+@media (max-width: 800px) {
+  p{
+    font-size: 4rem;
+    text-align: center;
+    margin: 0.5rem;
+  }
+
+  div{
+    padding: 0;
+    display: block;
+  }
+  nav ul{
+    text-align: center;
+  }
+  nav{
+    padding: 0.5rem 0 0.5rem 0;
+  }
+  ul{
+    padding: 0;
+  }
+  .contacts{
+    display: none;
+  }
+}
+
+@media (max-width: 400px){
+  p{
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,26 @@
+:host{
+  display: flex;
+  border: #222 solid 5px;
+  border-radius: 20px;
+  background-color: #f8f8ff;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+}
+
+.client{
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
+
+p{
+  white-space: pre-wrap;
+}

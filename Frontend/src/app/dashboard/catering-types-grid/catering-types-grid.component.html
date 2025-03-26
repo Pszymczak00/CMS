@@ -1,0 +1,10 @@
+<ag-grid-angular
+  style="width: 100%; height: 75vh;"
+  class="ag-theme-alpine"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [tooltipShowDelay]="500"
+  [components]="frameworkComponents">
+</ag-grid-angular>
+<button class="button" (click)="addRow()">Dodaj wiersz</button>
+<button class="button" (click)="sendData()">Zapisz zmiany</button>
