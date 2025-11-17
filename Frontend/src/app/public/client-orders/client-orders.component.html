@@ -1,0 +1,88 @@
+<div class="client-orders-container">
+  <h2>Moje zamówienia</h2>
+
+  @if (loading) {
+    <div class="loading">Ładowanie zamówień...</div>
+  } @else if (orders.length === 0) {
+    <div class="no-orders">
+      <p>Nie masz jeszcze żadnych zamówień.</p>
+      <p>Przejdź do <button class="link-button" (click)="goToMainPage()">strony głównej</button> i złóż pierwsze zamówienie!</p>
+    </div>
+  } @else {
+    <div class="orders-list">
+      @for (order of orders; track order.id) {
+        <div class="order-card">
+          <div class="order-header">
+            <h3>Zamówienie #{{order.id}}</h3>
+            <span class="order-date">{{formatDate(order.orderDays[0]?.date || '')}}</span>
+          </div>
+          <div class="order-details">
+            <div class="detail-item">
+              <span class="label">Dieta:</span>
+              <span class="value">{{order.cateringName}}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Kalorie:</span>
+              <span class="value">{{order.kcal}} kcal</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Liczba dni:</span>
+              <span class="value">{{getOrderDaysCount(order)}}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Cena łącznie:</span>
+              <span class="value price">{{order.price}} zł</span>
+            </div>
+          </div>
+          <button class="calendar-button" (click)="openCalendar(order)">
+            Zobacz dni dostaw
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+@if (showCalendar && selectedOrder) {
+  <div class="calendar-overlay-backdrop" (click)="closeCalendar()"></div>
+  <div class="calendar-overlay-window" (click)="$event.stopPropagation()">
+    <div class="floating-header">
+      <div>
+        <h3>Dni dostaw zamówienia #{{selectedOrder.id}}</h3>
+        <p>{{selectedOrder.cateringName}} &middot; {{selectedOrder.price}} zł</p>
+      </div>
+      <button class="close-btn" type="button" (click)="closeCalendar()">×</button>
+    </div>
+    <app-client-order-calendar 
+      [days]="selectedOrder.orderDays" 
+      [orderId]="selectedOrder.id"
+      (dateClick)="onDateClick($event)"
+      (futureDateClick)="onFutureDateClick($event)">
+    </app-client-order-calendar>
+  </div>
+}
+
+@if (showRating && selectedOrderDay) {
+  <div class="rating-overlay-backdrop" (click)="closeRating()"></div>
+  <div class="rating-overlay-window" (click)="$event.stopPropagation()">
+    <app-order-day-rating 
+      [orderDay]="selectedOrderDay"
+      (rated)="onRated()"
+      (cancelled)="closeRating()">
+    </app-order-day-rating>
+  </div>
+}
+
+@if (showModify && modifyDate && selectedOrder) {
+  <div class="modify-overlay-backdrop" (click)="closeModify()"></div>
+  <div class="modify-overlay-window" (click)="$event.stopPropagation()">
+    <app-order-day-modify 
+      [orderId]="selectedOrder.id"
+      [date]="modifyDate"
+      [exists]="modifyExists"
+      (modified)="onModified()"
+      (cancelled)="closeModify()">
+    </app-order-day-modify>
+  </div>
+}
+

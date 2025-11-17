@@ -23,11 +23,16 @@ namespace ContentManagementSystem.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLoginDataDto request)
         {
-            var user = _dataContext.Users.Where(x =>  x.Username == request.Username).First();
-            
+            var user = _dataContext.Users.FirstOrDefault(x =>  x.Username == request.Username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
             if (VerifyPassword(user.Password, request.Password))
             {
-                var token = _jwtService.GenerateToken("1", request.Username);
+                var token = _jwtService.GenerateToken(user.Id.ToString(), request.Username, "admin");
                 return Ok(new { Token = token });
             }
 

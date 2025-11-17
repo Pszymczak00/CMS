@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { MatCalendar, MatDatepickerModule, MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CateringPrice, DataService } from '../data/data.service';
+import { AuthService } from '../../dashboard/data/auth.service';
+import { ClientAuthService } from '../data/client-auth.service';
 
 export type CaloriePrice = {
   kcal: number;
@@ -19,15 +21,12 @@ export type CaloriePrice = {
 export class PlaceOrderComponent {
   @Input({required: true}) cateringName!: string
   dataService = inject(DataService)
+  authService = inject(AuthService)
+  clientAuthService = inject(ClientAuthService)
   @ViewChild(MatCalendar) calendar?: MatCalendar<Date>;
 
   order = {
-    email: '',
-    firstName: '',
-    lastName: '',
-    count: null  as CaloriePrice | null,
-    city: '',
-    street: ''
+    count: null  as CaloriePrice | null
   };
 
   numbers: CateringPrice[] = []
@@ -56,6 +55,10 @@ export class PlaceOrderComponent {
   }
 
   ngOnInit(){
+    if (!this.authService.isClientAuthenticated()) {
+      return;
+    }
+
     this.dataService.httpGetCateringPrice(this.cateringName).subscribe({
       next: (prices) => {
         this.numbers = prices
@@ -72,21 +75,30 @@ export class PlaceOrderComponent {
     this.maxDate = this.getOnlyDate(max);
   }
 
+  get isAuthenticated() {
+    return this.authService.isClientAuthenticated();
+  }
+
   onSubmit() {
+    if (!this.isAuthenticated) {
+      alert("Musisz się zalogować, aby złożyć zamówienie.");
+      return;
+    }
+
     if(this.selectedDates.length === 0){
       alert("Dodaj przynajmniej jeden dzień dostawy");
       return;
     }
 
+    if (!this.order.count) {
+      alert("Wybierz liczbę kalorii");
+      return;
+    }
+
     this.dataService.httpAddOrder({
-      Email: this.order.email,
-      Name: this.order.firstName,
-      Surname: this.order.lastName,
       Dates: this.selectedDates.map(date => this.toDateString(date)),
-      City: this.order.city,
-      Address: this.order.street,
-      Kcal: this.order.count?.kcal ?? 0,
       CateringName: this.cateringName,
+      Kcal: this.order.count.kcal,
       Price: this.totalPrice
     }).subscribe({
       next: (response) => {
@@ -98,7 +110,11 @@ export class PlaceOrderComponent {
       },
       error: (error) => {
         console.error('Błąd podczas składania zamówienia:', error);
-        alert('Wystąpił błąd podczas składania zamówienia. Spróbuj ponownie.');
+        if (error.status === 401) {
+          alert('Musisz się zalogować, aby złożyć zamówienie.');
+        } else {
+          alert('Wystąpił błąd podczas składania zamówienia. Spróbuj ponownie.');
+        }
       }}
     )
   }

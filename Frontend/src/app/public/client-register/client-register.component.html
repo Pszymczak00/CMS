@@ -1,0 +1,88 @@
+<h2>Rejestracja</h2>
+<form (submit)="onSubmit($event)" class="auth-form">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input 
+      id="email" 
+      type="email" 
+      [(ngModel)]="email" 
+      name="email" 
+      required 
+      placeholder="Wprowadź email" />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Hasło</label>
+    <input 
+      id="password" 
+      type="password" 
+      [(ngModel)]="password" 
+      name="password" 
+      required 
+      placeholder="Wprowadź hasło" />
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Potwierdź hasło</label>
+    <input 
+      id="confirmPassword" 
+      type="password" 
+      [(ngModel)]="confirmPassword" 
+      name="confirmPassword" 
+      required 
+      placeholder="Potwierdź hasło" />
+  </div>
+
+  <div class="form-group">
+    <label for="name">Imię</label>
+    <input 
+      id="name" 
+      type="text" 
+      [(ngModel)]="name" 
+      name="name" 
+      required 
+      placeholder="Wprowadź imię" />
+  </div>
+
+  <div class="form-group">
+    <label for="surname">Nazwisko</label>
+    <input 
+      id="surname" 
+      type="text" 
+      [(ngModel)]="surname" 
+      name="surname" 
+      required 
+      placeholder="Wprowadź nazwisko" />
+  </div>
+
+  <div class="form-group">
+    <label for="city">Miasto</label>
+    <input 
+      id="city" 
+      type="text" 
+      [(ngModel)]="city" 
+      name="city" 
+      required 
+      placeholder="Wprowadź miasto" />
+  </div>
+
+  <div class="form-group">
+    <label for="address">Adres</label>
+    <input 
+      id="address" 
+      type="text" 
+      [(ngModel)]="address" 
+      name="address" 
+      required 
+      placeholder="Wprowadź adres" />
+  </div>
+
+  <button type="submit" class="auth-button">Zarejestruj się</button>
+  @if (registerError) {
+    <div class="error-message">{{registerError}}</div>
+  }
+  <div class="toggle-link">
+    <a (click)="onCancel()" style="cursor: pointer;">Masz już konto? Zaloguj się</a>
+  </div>
+</form>
+

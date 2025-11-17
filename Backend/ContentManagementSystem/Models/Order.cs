@@ -6,15 +6,9 @@ namespace ContentManagementSystem.Models
     {
         public int Id { get; set; }
 
-        public string Email { get; set; }
+        public int ClientId { get; set; }
 
-        public string Name { get; set; }
-
-        public string Surname { get; set; }
-
-        public string City { get; set; }
-
-        public string Address { get; set; }
+        public Client Client { get; set; }
 
         public string CateringName { get; set; }
 

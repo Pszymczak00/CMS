@@ -5,6 +5,7 @@ namespace ContentManagementSystem.Dtos
     public class OrderAdminDto
     {
         public int Id { get; set; }
+        public int ClientId { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -15,10 +16,11 @@ namespace ContentManagementSystem.Dtos
         public int Price { get; set; }
         public List<OrderDayDto> OrderDays { get; set; }
 
-        public OrderAdminDto(int id, string email, string name, string surname, string city,
+        public OrderAdminDto(int id, int clientId, string email, string name, string surname, string city,
             string address, int kcal, string cateringName, int price, List<OrderDayDto> orderDays)
         {
             Id = id;
+            ClientId = clientId;
             Email = email;
             Name = name;
             Surname = surname;

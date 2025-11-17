@@ -1,0 +1,43 @@
+.calendar-wrapper{
+  max-width: 420px;
+}
+
+.readonly-calendar{
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+}
+
+:host ::ng-deep .selected-calendar-date .mat-calendar-body-cell-content{
+  background-color: rgb(173, 98, 104);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+:host ::ng-deep .rated-date .mat-calendar-body-cell-content{
+  border: 2px solid rgb(150, 80, 85);
+  font-weight: bold;
+}
+
+:host ::ng-deep .selected-calendar-date .mat-calendar-body-cell-content:hover{
+  background-color: rgb(150, 80, 85);
+  transform: scale(1.1);
+  transition: all 0.2s;
+}
+
+.empty-info{
+  font-size: 0.95rem;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.calendar-hint {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
+

@@ -20,3 +20,10 @@
     <app-order-calendar [days]="overlayOrder.orderDays"></app-order-calendar>
   </div>
 }
+
+@if(ratingsVisible && ratingsOrder){
+  <div class="ratings-overlay-backdrop" (click)="closeRatings()"></div>
+  <div class="ratings-overlay-window" (click)="$event.stopPropagation()">
+    <app-order-ratings-modal [order]="ratingsOrder" (close)="closeRatings()"></app-order-ratings-modal>
+  </div>
+}

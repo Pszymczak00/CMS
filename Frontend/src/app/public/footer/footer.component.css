@@ -28,19 +28,20 @@ div{
 
 .contact-button {
   margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #007bff;
+  padding: 0.5rem 1rem;
+  background-color: rgb(173, 98, 104);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
+  white-space: nowrap;
 }
 
 .contact-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(150, 80, 85);
 }
 
 @media (max-width: 450px){

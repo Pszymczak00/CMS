@@ -9,6 +9,8 @@ using ContentManagementSystem.Data;
 using ContentManagementSystem.Models;
 using ContentManagementSystem.Dtos;
 using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ContentManagementSystem.Controllers
 {
@@ -90,6 +92,7 @@ namespace ContentManagementSystem.Controllers
             return Ok(cateringPrices);
         }
 
+        [Authorize(Roles = "client")]
         [HttpPost(nameof(CreateOrder))]
         public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
         {
@@ -101,13 +104,24 @@ namespace ContentManagementSystem.Controllers
             if(orderDto.Dates == null || orderDto.Dates.Count == 0)
                 return BadRequest("Lista dat jest wymagana");
 
+            var clientIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(clientIdClaim) || !int.TryParse(clientIdClaim, out var clientId))
+            {
+                return Unauthorized();
+            }
+
+            var client = await _context.Clients.FindAsync(clientId);
+
+            if (client == null)
+            {
+                return Unauthorized();
+            }
+
             var order = new Order()
             {
-                Email = orderDto.Email,
-                Name = orderDto.Name,
-                Surname = orderDto.Surname,
-                City = orderDto.City,
-                Address = orderDto.Address,
+                ClientId = client.Id,
+                Client = client,
                 CateringName = orderDto.CateringName,
                 Kcal = orderDto.Kcal,
                 Price = orderDto.Price

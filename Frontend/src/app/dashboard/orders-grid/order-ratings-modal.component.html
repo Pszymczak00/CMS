@@ -1,0 +1,32 @@
+<div class="ratings-modal">
+  <div class="ratings-modal-header">
+    <div class="ratings-header">
+      <h3>Opinie dla zamówienia #{{order.id}}</h3>
+      <p>{{order.name}} {{order.surname}} &middot; {{order.email}}</p>
+    </div>
+    <button class="close-btn" type="button" (click)="closeModal()">×</button>
+  </div>
+
+  @if (getRatings().length === 0) {
+    <div class="no-ratings">
+      <p>Brak opinii dla tego zamówienia.</p>
+    </div>
+  } @else {
+    <div class="ratings-list">
+      @for (day of getRatings(); track day.id) {
+        <div class="rating-item">
+          <div class="rating-header">
+            <span class="rating-date">{{formatDate(day.date)}}</span>
+            <span class="rating-stars">{{getStars(day.rating)}}</span>
+          </div>
+          @if (day.comment) {
+            <div class="rating-comment">
+              <p>{{day.comment}}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>
+

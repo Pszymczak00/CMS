@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace ContentManagementSystem.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [ApiController]
     public class PrivateController : ControllerBase
     {
@@ -273,20 +273,22 @@ namespace ContentManagementSystem.Controllers
         public ActionResult<List<OrderAdminDto>> Orders()
         {
             var orders = _context.Orders
+                .Include(o => o.Client)
                 .Include(o => o.OrderDays)
                 .Select(o => new OrderAdminDto(
                     o.Id,
-                    o.Email,
-                    o.Name,
-                    o.Surname,
-                    o.City,
-                    o.Address,
+                    o.ClientId,
+                    o.Client.Email,
+                    o.Client.Name,
+                    o.Client.Surname,
+                    o.Client.City,
+                    o.Client.Address,
                     o.Kcal,
                     o.CateringName,
                     o.Price,
                     o.OrderDays
                         .OrderBy(od => od.Date)
-                        .Select(od => new OrderDayDto(od.Id, od.Date.ToString("yyyy-MM-dd")))
+                        .Select(od => new OrderDayDto(od.Id, od.Date.ToString("yyyy-MM-dd"), od.Rating, od.Comment))
                         .ToList()
                 ))
                 .ToList();

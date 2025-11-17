@@ -1,0 +1,39 @@
+<div class="client-auth-container">
+  @if (!showRegister) {
+    <h2>Logowanie</h2>
+    <form (submit)="onSubmit($event)" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          id="email" 
+          type="email" 
+          [(ngModel)]="email" 
+          name="email" 
+          required 
+          placeholder="Wprowadź email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Hasło</label>
+        <input 
+          id="password" 
+          type="password" 
+          [(ngModel)]="password" 
+          name="password" 
+          required 
+          placeholder="Wprowadź hasło" />
+      </div>
+
+      <button type="submit" class="auth-button">Zaloguj</button>
+      @if (loginError) {
+        <div class="error-message">{{loginError}}</div>
+      }
+      <div class="toggle-link">
+        <a (click)="toggleRegister()" style="cursor: pointer;">Nie masz konta? Zarejestruj się</a>
+      </div>
+    </form>
+  } @else {
+    <app-client-register (registered)="showRegister = false" (cancel)="toggleRegister()"></app-client-register>
+  }
+</div>
+

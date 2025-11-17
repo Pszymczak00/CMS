@@ -1,0 +1,90 @@
+.modify-container {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modify-container h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.date-info {
+  margin: 10px 0;
+  font-size: 1.1em;
+  color: #666;
+  font-weight: 500;
+}
+
+.info-message {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 15px 0;
+  color: #856404;
+}
+
+.action-message {
+  margin: 15px 0;
+}
+
+.action-message p {
+  margin: 0;
+  color: #333;
+  font-size: 1em;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 15px 0;
+  color: #721c24;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.confirm-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.confirm-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.confirm-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.cancel-button:disabled,
+.confirm-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

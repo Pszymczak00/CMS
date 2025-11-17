@@ -45,19 +45,19 @@ label {
 .primary-button {
   display: block;
   width: 100%;
-  padding: 10px 15px;
-  background-color: #007bff;
+  padding: 0.5rem 1rem;
+  background-color: rgb(173, 98, 104);
   color: white;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 700;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
 .primary-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(150, 80, 85);
 }
 
 .primary-button:disabled {
@@ -71,18 +71,21 @@ label {
 }
 
 .secondary-button {
-  padding: 10px 15px;
-  border: 1px solid #007bff;
-  background: transparent;
-  color: #007bff;
-  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  background-color: rgb(173, 98, 104);
+  color: white;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  height: 56px;
+  transition: background-color 0.2s;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  height: auto;
 }
 
 .secondary-button:hover {
-  background-color: #eaf2ff;
+  background-color: rgb(150, 80, 85);
 }
 
 /* Stylowanie dla błędów walidacji */
@@ -129,7 +132,23 @@ div.error-message {
 }
 
 :host ::ng-deep .selected-calendar-date .mat-calendar-body-cell-content{
-  background-color: #3f51b5;
+  background-color: rgb(173, 98, 104);
   color: #fff;
   border-radius: 50%;
+}
+
+.login-required {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.login-required p {
+  margin: 10px 0;
+  color: #856404;
+  font-size: 16px;
 }

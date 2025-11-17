@@ -1,0 +1,36 @@
+<div class="modify-container">
+  <h3>{{exists ? 'Usuń dzień dostawy' : 'Dodaj dzień dostawy'}}</h3>
+  <p class="date-info">Data: {{formatDate(date)}}</p>
+
+  @if (exists && !canRemove()) {
+    <div class="info-message">
+      Możesz usuwać tylko dni od jutra do roku w przyszłość.
+    </div>
+  } @else if (!exists && !canAdd()) {
+    <div class="info-message">
+      Możesz dodawać tylko dni od jutra do roku w przyszłość.
+    </div>
+  } @else {
+    <div class="action-message">
+      @if (exists) {
+        <p>Czy na pewno chcesz usunąć ten dzień z zamówienia?</p>
+      } @else {
+        <p>Czy chcesz dodać ten dzień do zamówienia?</p>
+      }
+    </div>
+
+    @if (error) {
+      <div class="error-message">{{error}}</div>
+    }
+
+    <div class="buttons">
+      <button type="button" class="cancel-button" (click)="onCancel()" [disabled]="processing">
+        Anuluj
+      </button>
+      <button type="button" class="confirm-button" (click)="onSubmit()" [disabled]="processing">
+        {{processing ? 'Przetwarzanie...' : (exists ? 'Usuń' : 'Dodaj')}}
+      </button>
+    </div>
+  }
+</div>
+

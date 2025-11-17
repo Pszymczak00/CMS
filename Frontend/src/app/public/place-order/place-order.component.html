@@ -1,65 +1,11 @@
 <h2>Złóż zamówienie na dietę {{cateringName}}</h2>
+@if (!isAuthenticated) {
+  <div class="login-required">
+    <p>Musisz się zalogować, aby złożyć zamówienie.</p>
+    <p>Kliknij przycisk "Zaloguj" w prawym górnym rogu, aby się zalogować lub zarejestrować.</p>
+  </div>
+} @else {
 <form (ngSubmit)="onSubmit()" #placeOrderForm="ngForm">
-  <div>
-    <label for="email">Email:</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      [(ngModel)]="order.email"
-      required
-      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-      #email="ngModel"
-      class="form-control"
-    />
-    @if (email.errors?.['required'] && email.touched) {
-      <div class="error-message">
-        Email jest wymagany.
-      </div>
-    }
-    @if (email.errors?.['pattern'] && email.touched) {
-      <div class="error-message">
-        Podaj poprawny adres email.
-      </div>
-    }
-  </div>
-
-  <div>
-    <label for="firstName">Imię:</label>
-    <input
-      type="text"
-      id="firstName"
-      name="firstName"
-      [(ngModel)]="order.firstName"
-      required
-      #firstName="ngModel"
-      class="form-control"
-    />
-    @if (firstName.invalid && firstName.touched) {
-      <div class="error-message">
-        Imię jest wymagane.
-      </div>
-    }
-  </div>
-
-  <div>
-    <label for="lastName">Nazwisko:</label>
-    <input
-      type="text"
-      id="lastName"
-      name="lastName"
-      [(ngModel)]="order.lastName"
-      required
-      #lastName="ngModel"
-      class="form-control"
-
-    />
-    @if (lastName.invalid && lastName.touched) {
-      <div class="error-message">
-        Nazwisko jest wymagane.
-      </div>
-    }
-  </div>
 
   <div class="date-picker">
     <label class="date-picker__label">Dni dostawy:</label>
@@ -103,45 +49,11 @@
     }
   </div>
 
-  <div>
-    <label for="city">Miasto:</label>
-    <input
-      type="text"
-      id="city"
-      name="city"
-      [(ngModel)]="order.city"
-      required
-      #city="ngModel"
-      class="form-control"
-    />
-    @if (city.invalid && city.touched) {
-      <div class="error-message">
-        Miasto jest wymagane.
-      </div>
-    }
-  </div>
-
-  <div>
-    <label for="street">Ulica:</label>
-    <input
-      type="text"
-      id="street"
-      name="street"
-      [(ngModel)]="order.street"
-      required
-      #street="ngModel"
-      class="form-control"
-    />
-    @if (street.invalid && street.touched) {
-      <div class="error-message">
-        Ulica jest wymagana.
-      </div>
-    }
-  </div>
   <div class="date-difference">
     @if (selectedDates.length && order.count) {
       <p>Łączna cena ({{selectedDates.length}} dni): {{ totalPrice }} zł</p>
     }
   </div>
-  <button class="primary-button" type="submit" [disabled]="!placeOrderForm.form.valid || selectedDates.length === 0">Złóż zamówienie</button>
+  <button class="primary-button" type="submit" [disabled]="!placeOrderForm.form.valid || selectedDates.length === 0 || !order.count">Złóż zamówienie</button>
 </form>
+}

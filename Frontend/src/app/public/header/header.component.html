@@ -1,10 +1,27 @@
 <div>
   <p class="name" (click)="OnClick()">{{businessName}}</p>
-  <ul class="contacts">
-    <li class="phoneNumber">Tel: {{numer}}</li>
-    <li class="email">Email: {{email}}</li>
-  </ul>
+  <div class="header-right">
+    <ul class="contacts">
+      <li class="phoneNumber">Tel: {{numer}}</li>
+      <li class="email">Email: {{email}}</li>
+    </ul>
+    <div class="auth-container">
+      @if (isAuthenticated) {
+        <button class="auth-button" (click)="OnOrdersClick()">Moje zamówienia</button>
+        <button class="auth-button" (click)="logout()">Wyloguj</button>
+      } @else {
+        <button class="auth-button" (click)="toggleLogin()">Zaloguj</button>
+      }
+    </div>
+  </div>
 </div>
+@if (showLogin && !isAuthenticated) {
+  <div class="login-overlay" (click)="toggleLogin()"></div>
+  <div class="login-modal" (click)="$event.stopPropagation()">
+    <app-client-login></app-client-login>
+    <button class="close-button" (click)="toggleLogin()">×</button>
+  </div>
+}
 <nav>
   <ul>
     @for (item of navBar; track $index) {

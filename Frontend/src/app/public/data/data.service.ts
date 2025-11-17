@@ -28,14 +28,9 @@ export type CateringPrice = {
 
 
 export type Order = {
-  Email: string;
-  Name: string;
-  Surname: string;
   Dates: string[];
-  City: string;
-  Address: string;
-  Kcal: number;
   CateringName: string;
+  Kcal: number;
   Price: number;
 }
 

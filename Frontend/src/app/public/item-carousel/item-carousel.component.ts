@@ -1,6 +1,7 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { StateService } from '../data/state.service';
+import { AuthService } from '../../dashboard/data/auth.service';
 
 @Component({
   selector: 'app-item-carousel',
@@ -12,6 +13,7 @@ import { StateService } from '../data/state.service';
 export class ItemCarouselComponent {
   dataService = inject(DataService)
   stateService = inject(StateService)
+  authService = inject(AuthService)
   get items(){
     return this.dataService.getCateringTypes()
   } 
@@ -19,6 +21,10 @@ export class ItemCarouselComponent {
   itemsPerPage = 4;
 
   onClick(name: string){
+    if (!this.authService.isClientAuthenticated()) {
+      alert('Musisz się zalogować, aby złożyć zamówienie. Kliknij przycisk "Zaloguj" w prawym górnym rogu.');
+      return;
+    }
     this.stateService.setCateringType(name)
   }
 

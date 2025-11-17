@@ -34,6 +34,8 @@ export type OrderDay = {
   id: number;
   orderId: number;
   date: string;
+  rating: number | null;
+  comment: string | null;
 }
 
 export type Order = {

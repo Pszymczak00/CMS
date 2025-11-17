@@ -1,0 +1,55 @@
+<div class="rating-container">
+  <h3>Oceń dzień dostawy</h3>
+  <p class="date-info">Data: {{formatDate(orderDay.date)}}</p>
+
+  @if (!canRate()) {
+    <div class="info-message">
+      Możesz ocenić tylko zamówienia z dzisiaj lub starsze.
+    </div>
+  } @else {
+    <div class="rating-section">
+      <label>Ocena:</label>
+      <div class="stars-container">
+        @for (star of [1, 2, 3, 4, 5]; track star) {
+          <button
+            type="button"
+            class="star-button"
+            (click)="setRating(star)"
+            (mouseenter)="setHoveredRating(star)"
+            (mouseleave)="clearHover()"
+            [class.active]="star <= (hoveredRating || rating)"
+            [class.filled]="star <= rating">
+            ★
+          </button>
+        }
+      </div>
+      @if (rating > 0) {
+        <span class="rating-text">{{rating}} / 5</span>
+      }
+    </div>
+
+    <div class="comment-section">
+      <label for="comment">Komentarz (opcjonalny):</label>
+      <textarea
+        id="comment"
+        [(ngModel)]="comment"
+        rows="4"
+        placeholder="Dodaj komentarz do swojej oceny..."
+        class="comment-input"></textarea>
+    </div>
+
+    @if (error) {
+      <div class="error-message">{{error}}</div>
+    }
+
+    <div class="buttons">
+      <button type="button" class="cancel-button" (click)="onCancel()" [disabled]="saving">
+        Anuluj
+      </button>
+      <button type="button" class="save-button" (click)="onSubmit()" [disabled]="saving || rating < 1">
+        {{saving ? 'Zapisywanie...' : 'Zapisz ocenę'}}
+      </button>
+    </div>
+  }
+</div>
+

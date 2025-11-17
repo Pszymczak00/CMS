@@ -14,14 +14,16 @@ namespace ContentManagementSystem.Services
             _configuration = configuration;
         }
 
-        public string GenerateToken(string userId, string username)
+        public string GenerateToken(string userId, string username, string role)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var claims = new[]
             {
             new Claim(JwtRegisteredClaimNames.Sub, userId),
             new Claim(JwtRegisteredClaimNames.UniqueName, username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.NameIdentifier, userId),
+            new Claim(ClaimTypes.Role, role)
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]));

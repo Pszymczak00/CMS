@@ -1,0 +1,12 @@
+<div class="calendar-wrapper">
+  <mat-calendar
+    #calendar
+    class="readonly-calendar"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
+    [dateClass]="dateClass"
+    (selectedChange)="onSelectedChange($event)">
+  </mat-calendar>
+  <p class="calendar-hint">Kliknij na datę, aby ocenić dzień dostawy lub dodać/usunąć dzień</p>
+</div>
+

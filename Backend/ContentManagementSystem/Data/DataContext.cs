@@ -12,6 +12,7 @@ namespace ContentManagementSystem.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<BusinessBasicData> BusinessBasicData { get; set; } 
         public DbSet<ClientOpinion> ClientOpinions { get; set; }
         public DbSet<CateringType> CateringTypes { get; set; }

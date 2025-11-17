@@ -10,7 +10,7 @@
 }
 
 :host ::ng-deep .selected-calendar-date .mat-calendar-body-cell-content{
-  background-color: #3f51b5;
+  background-color: rgb(173, 98, 104);
   color: #fff;
   border-radius: 50%;
 }
