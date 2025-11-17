@@ -17,7 +17,9 @@ namespace ContentManagementSystem.Data
         public DbSet<CateringType> CateringTypes { get; set; }
         public DbSet<CateringPrice> CateringPrices { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDay> OrderDays { get; set; }
 
         public DbSet<Site> Sites { get; set; }
+        public DbSet<ContactForm> ContactForms { get; set; }
     }
 }

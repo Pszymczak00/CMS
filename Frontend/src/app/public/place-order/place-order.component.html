@@ -33,6 +33,7 @@
       [(ngModel)]="order.firstName"
       required
       #firstName="ngModel"
+      class="form-control"
     />
     @if (firstName.invalid && firstName.touched) {
       <div class="error-message">
@@ -50,6 +51,7 @@
       [(ngModel)]="order.lastName"
       required
       #lastName="ngModel"
+      class="form-control"
 
     />
     @if (lastName.invalid && lastName.touched) {
@@ -59,40 +61,23 @@
     }
   </div>
 
-  <div>
-    <label for="startDate">Data początkowa:</label>
-    <input
-      type="date"
-      id="startDate"
-      name="startDate"
-      [(ngModel)]="order.startDate"
-      required
-      #startDate="ngModel"
-      [min]="minStartDate"
-      [max]="maxDate"
-    />
-    @if (startDate.invalid && startDate.touched) {
-      <div class="error-message">
-        Data początkowa jest wymagana.
-      </div>
-    }
-  </div>
-
-  <div>
-    <label for="endDate">Data końcowa:</label>
-    <input
-      type="date"
-      id="endDate"
-      name="endDate"
-      [(ngModel)]="order.endDate"
-      required
-      #endDate="ngModel"
-      [min]="minStartDate"
-      [max]="maxDate"
-    />
-    @if (endDate.invalid && endDate.touched) {
-      <div class="error-message">
-        Data końcowa jest wymagana.
+  <div class="date-picker">
+    <label class="date-picker__label">Dni dostawy:</label>
+    <div class="date-picker__controls">
+      <button type="button" class="secondary-button" (click)="toggleCalendar()">
+        {{ showCalendar ? 'Zamknij kalendarz' : 'Wybierz daty' }}
+      </button>
+    </div>
+    @if (showCalendar) {
+      <div class="calendar-overlay">
+        <mat-calendar
+          [minDate]="minDate"
+          [maxDate]="maxDate"
+          [dateFilter]="dateFilter"
+          [dateClass]="dateClass"
+          (selectedChange)="onDateSelected($event)">
+        </mat-calendar>
+        <button type="button" class="primary-button small" (click)="closeCalendar()">Gotowe</button>
       </div>
     }
   </div>
@@ -103,6 +88,7 @@
       id="count"
       name="count"
       [(ngModel)]="order.count"
+      (ngModelChange)="onCountChange()"
       required
       #count="ngModel"
     >
@@ -126,6 +112,7 @@
       [(ngModel)]="order.city"
       required
       #city="ngModel"
+      class="form-control"
     />
     @if (city.invalid && city.touched) {
       <div class="error-message">
@@ -143,6 +130,7 @@
       [(ngModel)]="order.street"
       required
       #street="ngModel"
+      class="form-control"
     />
     @if (street.invalid && street.touched) {
       <div class="error-message">
@@ -151,9 +139,9 @@
     }
   </div>
   <div class="date-difference">
-    @if (order.startDate && order.endDate && order.count) {
-      <p>Cena: {{ calculateDaysDifference(order.startDate, order.endDate, order.count) }} zł</p>
+    @if (selectedDates.length && order.count) {
+      <p>Łączna cena ({{selectedDates.length}} dni): {{ totalPrice }} zł</p>
     }
   </div>
-  <button type="submit" [disabled]="!placeOrderForm.form.valid">Złóż zamówienie</button>
+  <button class="primary-button" type="submit" [disabled]="!placeOrderForm.form.valid || selectedDates.length === 0">Złóż zamówienie</button>
 </form>

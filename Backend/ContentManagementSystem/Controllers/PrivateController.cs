@@ -270,9 +270,34 @@ namespace ContentManagementSystem.Controllers
         }
 
         [HttpGet(nameof(Orders))]
-        public ActionResult<List<Order>> Orders()
+        public ActionResult<List<OrderAdminDto>> Orders()
         {
-            return _context.Orders.ToList();
+            var orders = _context.Orders
+                .Include(o => o.OrderDays)
+                .Select(o => new OrderAdminDto(
+                    o.Id,
+                    o.Email,
+                    o.Name,
+                    o.Surname,
+                    o.City,
+                    o.Address,
+                    o.Kcal,
+                    o.CateringName,
+                    o.Price,
+                    o.OrderDays
+                        .OrderBy(od => od.Date)
+                        .Select(od => new OrderDayDto(od.Id, od.Date.ToString("yyyy-MM-dd")))
+                        .ToList()
+                ))
+                .ToList();
+
+            return orders;
+        }
+
+        [HttpGet(nameof(ContactForms))]
+        public ActionResult<List<ContactForm>> ContactForms()
+        {
+            return _context.ContactForms.ToList();
         }
 
         [HttpPost("Upload/{fileName}")]

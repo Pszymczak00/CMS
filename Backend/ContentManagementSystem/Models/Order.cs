@@ -1,4 +1,6 @@
-﻿namespace ContentManagementSystem.Models
+﻿using System.Collections.Generic;
+
+namespace ContentManagementSystem.Models
 {
     public class Order
     {
@@ -10,10 +12,6 @@
 
         public string Surname { get; set; }
 
-        public DateOnly DateStart { get; set; }
-
-        public DateOnly DateEnd { get; set; }
-
         public string City { get; set; }
 
         public string Address { get; set; }
@@ -23,5 +21,7 @@
         public int Kcal {  get; set; }
 
         public int Price { get; set; }
+
+        public ICollection<OrderDay> OrderDays { get; set; } = new List<OrderDay>();
     }
 }

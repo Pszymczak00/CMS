@@ -98,13 +98,14 @@ namespace ContentManagementSystem.Controllers
             if(cateringTypes.Count == 0) 
                 return NotFound("Nie znaleziono takiego typu diety");
 
+            if(orderDto.Dates == null || orderDto.Dates.Count == 0)
+                return BadRequest("Lista dat jest wymagana");
+
             var order = new Order()
             {
                 Email = orderDto.Email,
                 Name = orderDto.Name,
                 Surname = orderDto.Surname,
-                DateStart = orderDto.DateStart,
-                DateEnd = orderDto.DateEnd,
                 City = orderDto.City,
                 Address = orderDto.Address,
                 CateringName = orderDto.CateringName,
@@ -112,8 +113,39 @@ namespace ContentManagementSystem.Controllers
                 Price = orderDto.Price
             };
 
+            foreach (var date in orderDto.Dates)
+            {
+                order.OrderDays.Add(new OrderDay
+                {
+                    Date = date,
+                    Order = order
+                });
+            }
+
             _context.Orders.Add(order);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost(nameof(SubmitContactForm))]
+        public async Task<ActionResult> SubmitContactForm(ContactFormDto contactFormDto)
+        {
+            if (contactFormDto == null)
+            {
+                return BadRequest("Dane formularza są wymagane.");
+            }
+
+            var contactForm = new ContactForm()
+            {
+                FirstName = contactFormDto.FirstName,
+                LastName = contactFormDto.LastName,
+                Email = contactFormDto.Email,
+                Content = contactFormDto.Content
+            };
+
+            _context.ContactForms.Add(contactForm);
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

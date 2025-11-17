@@ -13,6 +13,7 @@ import { CateringPricesGridComponent } from './catering-prices-grid/catering-pri
 import { AuthService } from './data/auth.service';
 import { LoginComponent } from "./login/login.component";
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ContactFormsGridComponent } from './contact-forms-grid/contact-forms-grid.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
   imports: [EditableGridComponent, PlaceOrderComponent, OrdersGridComponent,
     BasicBusinessDataGridComponent, ClientOpinionsGridComponent, SiteComponent,
     SitesGridComponent, CateringTypesGridComponent, PhotoUploaderComponent, CateringPricesGridComponent,
-    LoginComponent, ChangePasswordComponent],
+    LoginComponent, ChangePasswordComponent, ContactFormsGridComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -54,6 +55,6 @@ export class DashboardComponent {
 
 
   get navBar(){
-    return ["Podstawowe dane", "Opinie klientów", "Podstrony", "Dostępne diety", "Zamówienia"]
+    return ["Podstawowe dane", "Opinie klientów", "Podstrony", "Dostępne diety", "Zamówienia", "Formularze kontaktowe"]
   }
 }

@@ -1,32 +1,44 @@
 import { Component, inject } from '@angular/core';
+import { NgStyle } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef } from 'ag-grid-community';
 import { DataService, Order } from '../data/data.service';
+import { OrderCalendarComponent } from '../order-calendar/order-calendar.component';
+import { CalendarButtonRendererComponent } from './calendar-button-renderer.component';
 
 
 
 @Component({
   selector: 'app-orders-grid',
   standalone: true,
-  imports: [AgGridModule],  // Importujemy komponent do Angulara
+  imports: [AgGridModule, OrderCalendarComponent, CalendarButtonRendererComponent, NgStyle],  // Importujemy komponent do Angulara
   templateUrl: './orders-grid.component.html',
   styleUrls: ['./orders-grid.component.css'],
 })
 export class OrdersGridComponent {
   dataService = inject(DataService);
+  overlayVisible = false;
+  overlayOrder: Order | null = null;
+  overlayStyle: { top: string; left: string } | null = null;
 
   columnDefs: ColDef<Order>[] = [
     { headerName: 'Id', field: 'id', width: 100 },
     { headerName: 'Email', field: 'email', width: 250 },
-    { headerName: 'Name', field: 'name', width: 150 },
-    { headerName: 'Surname', field: 'surname', width: 150 },
-    { headerName: 'Start Date', field: 'dateStart' },
-    { headerName: 'End Date', field: 'dateEnd' },
-    { headerName: 'City', field: 'city' },
-    { headerName: 'Address', field: 'address' },
+    { headerName: 'Imię', field: 'name', width: 150 },
+    { headerName: 'Nazwisko', field: 'surname', width: 150 },
+    { headerName: 'Miasto', field: 'city' },
+    { headerName: 'Adres', field: 'address' },
     { headerName: 'Kcal', field: 'kcal' },
     { headerName: 'Nazwa diety', field: 'cateringName' },
-    { headerName: 'Cena łącznie', field: 'price' }
+    { headerName: 'Cena łącznie', field: 'price' },
+    {
+      headerName: 'Kalendarz',
+      cellRenderer: CalendarButtonRendererComponent,
+      width: 140,
+      cellRendererParams: {
+        onOpen: (order: Order, event: MouseEvent) => this.openCalendar(order, event)
+      }
+    },
   ];
 
   rowData : Order[] = [];
@@ -37,4 +49,14 @@ export class OrdersGridComponent {
     });
   }
 
+  openCalendar(order: Order, event: MouseEvent){
+    this.overlayOrder = order;
+    this.overlayStyle = null;
+    this.overlayVisible = true;
+  }
+
+  closeCalendar(){
+    this.overlayVisible = false;
+    this.overlayOrder = null;
+  }
 }

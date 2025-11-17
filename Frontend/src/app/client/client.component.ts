@@ -10,11 +10,12 @@ import { DashboardComponent } from "../dashboard/dashboard.component";
 import { FooterComponent } from "../public/footer/footer.component";
 import { SiteComponent } from '../public/site/site.component';
 import { DetailsComponent } from "../public/details/details.component";
+import { ContactFormComponent } from "../public/contact-form/contact-form.component";
 
 @Component({
   selector: 'app-client',
   standalone: true,
-  imports: [HeaderComponent, ClientOpinionsComponent, ItemCarouselComponent, PlaceOrderComponent, FooterComponent, SiteComponent, DetailsComponent],
+  imports: [HeaderComponent, ClientOpinionsComponent, ItemCarouselComponent, PlaceOrderComponent, FooterComponent, SiteComponent, DetailsComponent, ContactFormComponent],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css'
 })
@@ -36,5 +37,9 @@ export class ClientComponent {
 
   get siteName(){
     return this.stateService.getSiteName()
+  }
+
+  get showContactForm(){
+    return this.stateService.getShowContactForm()
   }
 }

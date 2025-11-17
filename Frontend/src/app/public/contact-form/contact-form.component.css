@@ -25,7 +25,7 @@ label {
 }
 
 /* Stylowanie pól wejściowych */
-.form-control, select {
+input, textarea, select {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -33,16 +33,23 @@ label {
   border-radius: 5px;
   font-size: 14px;
   transition: border-color 0.3s ease;
+  font-family: inherit;
 }
 
-.form-control:focus, select:focus {
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Efekt hover/focus na polach wejściowych */
+input:focus, textarea:focus, select:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Styl przycisku głównego */
-.primary-button {
+/* Stylowanie przycisku */
+button {
   display: block;
   width: 100%;
   padding: 10px 15px;
@@ -56,37 +63,19 @@ label {
   transition: background-color 0.3s ease;
 }
 
-.primary-button:hover {
+/* Efekt hover na przycisku */
+button:hover {
   background-color: #0056b3;
 }
 
-.primary-button:disabled {
+/* Stylowanie przycisku, gdy jest zablokowany */
+button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.primary-button.small{
-  width: auto;
-  margin-top: 10px;
-}
-
-.secondary-button {
-  padding: 10px 15px;
-  border: 1px solid #007bff;
-  background: transparent;
-  color: #007bff;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  height: 56px;
-}
-
-.secondary-button:hover {
-  background-color: #eaf2ff;
-}
-
 /* Stylowanie dla błędów walidacji */
-.form-control.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
   border-color: #dc3545;
   background-color: #fff5f5;
 }
@@ -98,38 +87,3 @@ div.error-message {
   margin-bottom: 10px;
 }
 
-.date-picker {
-  margin-bottom: 20px;
-}
-
-.date-picker__label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.date-picker__controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.date-picker__field {
-  flex: 1 1 280px;
-}
-
-.calendar-overlay{
-  margin-top: 15px;
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-:host ::ng-deep .selected-calendar-date .mat-calendar-body-cell-content{
-  background-color: #3f51b5;
-  color: #fff;
-  border-radius: 50%;
-}

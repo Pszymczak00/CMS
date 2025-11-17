@@ -1,8 +1,22 @@
-<ag-grid-angular
-  style="width: 100%; height: 75vh;"
-  class="ag-theme-alpine"
-  [rowData]="rowData"
-  [columnDefs]="columnDefs">
-</ag-grid-angular>
+<div class="orders-grid-wrapper">
+  <ag-grid-angular
+    style="width: 100%; height: 60vh;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs">
+  </ag-grid-angular>
+</div>
 
-<!-- Dodawanie wiersza -->
+@if(overlayVisible && overlayOrder){
+  <div class="calendar-overlay-backdrop" (click)="closeCalendar()"></div>
+  <div class="calendar-overlay-window">
+    <div class="floating-header">
+      <div>
+        <h3>Dni dostaw zamówienia #{{overlayOrder.id}}</h3>
+        <p>{{overlayOrder.name}} {{overlayOrder.surname}} &middot; {{overlayOrder.email}}</p>
+      </div>
+      <button class="close-btn" type="button" (click)="closeCalendar()">×</button>
+    </div>
+    <app-order-calendar [days]="overlayOrder.orderDays"></app-order-calendar>
+  </div>
+}

@@ -1,0 +1,16 @@
+@if(dateList.length){
+  <div class="calendar-wrapper">
+    <mat-calendar
+      #calendar
+      class="readonly-calendar"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [dateClass]="dateClass"
+      (selectedChange)="onSelectedChange()">
+    </mat-calendar>
+  </div>
+}
+@else {
+  <p class="empty-info">Brak dni dostaw dla tego zamówienia.</p>
+}
+

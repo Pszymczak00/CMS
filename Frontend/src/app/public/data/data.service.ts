@@ -31,8 +31,7 @@ export type Order = {
   Email: string;
   Name: string;
   Surname: string;
-  DateStart: string; 
-  DateEnd: string; 
+  Dates: string[];
   City: string;
   Address: string;
   Kcal: number;
@@ -44,6 +43,13 @@ export type Site = {
   name: string;
   text: string;
   priority: number;
+}
+
+export type ContactForm = {
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Content: string;
 }
 
 
@@ -124,6 +130,10 @@ export class DataService {
 
   httpAddOrder(order : Order){
     return this.http.post(`${API_URL}/api/Public/CreateOrder`, order)
+  }
+
+  httpSubmitContactForm(contactForm: ContactForm){
+    return this.http.post(`${API_URL}/api/Public/SubmitContactForm`, contactForm)
   }
 
   constructor(private http: HttpClient) {}

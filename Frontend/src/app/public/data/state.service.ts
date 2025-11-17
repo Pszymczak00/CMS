@@ -7,9 +7,10 @@ export class StateService {
   siteName = ""
   cateringTypeName = ""
   cateringDetailsName = ""
+  showContactForm = false
 
   getmainSiteVisible(){
-    if(this.siteName === "" && this.cateringTypeName === "" && this.cateringDetailsName === "")
+    if(this.siteName === "" && this.cateringTypeName === "" && this.cateringDetailsName === "" && !this.showContactForm)
       return true
     return false
   }
@@ -48,6 +49,20 @@ export class StateService {
     this.cateringTypeName = ""
     this.cateringDetailsName = ""
     this.siteName = name
+    this.showContactForm = false
+  }
+
+  getShowContactForm(){
+    return this.showContactForm
+  }
+
+  setShowContactForm(show: boolean){
+    this.showContactForm = show
+    if(show){
+      this.siteName = ""
+      this.cateringTypeName = ""
+      this.cateringDetailsName = ""
+    }
   }
 
 }

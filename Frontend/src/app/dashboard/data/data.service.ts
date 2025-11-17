@@ -30,18 +30,23 @@ export type CateringPrice = {
 }
 
 
+export type OrderDay = {
+  id: number;
+  orderId: number;
+  date: string;
+}
+
 export type Order = {
   id: number;
   email: string;
   name: string;
   surname: string;
-  dateStart: string; 
-  dateEnd: string; 
   city: string;
   address: string;
   kcal: number;
   cateringName: string;
-  price: number
+  price: number;
+  orderDays: OrderDay[];
 }
 
 export type Site = {
@@ -49,6 +54,14 @@ export type Site = {
   name: string;
   text: string;
   priority: number;
+}
+
+export type ContactForm = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  content: string;
 }
 
 type PostSites = {
@@ -116,6 +129,10 @@ export class DataService {
 
   httpGetOrders(){
     return this.http.get<Order[]>(`${API_URL}/api/Private/Orders`)
+  }
+
+  httpGetContactForms(){
+    return this.http.get<ContactForm[]>(`${API_URL}/api/Private/ContactForms`)
   }
 
   constructor(private http: HttpClient) {}

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DataService } from '../data/data.service';
+import { StateService } from '../data/state.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +11,7 @@ import { DataService } from '../data/data.service';
 })
 export class FooterComponent {
   dataService = inject(DataService)
+  stateService = inject(StateService)
 
   get businessName(){
     return this.dataService.getbusinessBasicData().name
@@ -19,5 +21,9 @@ export class FooterComponent {
   }
   get email(){
     return this.dataService.getbusinessBasicData().email
+  }
+
+  showContactForm(){
+    this.stateService.setShowContactForm(true)
   }
 }

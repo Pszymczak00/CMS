@@ -5,6 +5,9 @@
       <app-item-carousel></app-item-carousel>
       <app-client-opinions></app-client-opinions> 
     }
+    @else if(showContactForm){
+      <app-contact-form></app-contact-form>
+    }
     @else if(cateringName){
       <app-place-order [cateringName]="cateringName"></app-place-order>
     }

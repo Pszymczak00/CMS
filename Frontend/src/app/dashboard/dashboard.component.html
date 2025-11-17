@@ -44,6 +44,10 @@
     <h2>Zamówienia</h2>
     <app-orders-grid></app-orders-grid>
   }
+  @else if (site === "Formularze kontaktowe") {
+    <h2>Formularze kontaktowe</h2>
+    <app-contact-forms-grid></app-contact-forms-grid>
+  }
   @else if (site === "Photo-uploader") {
     <h2>Wybierz zdjęcie</h2>
     <app-photo-uploader [id]="number"></app-photo-uploader>
